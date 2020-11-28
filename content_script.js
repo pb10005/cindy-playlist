@@ -136,7 +136,7 @@ function remove() {
     playlist = playlist.filter(function(puzzle) {
         return puzzle !== self.puzzle;
     });
-    idx = Math.min(idx, playlist.length);
+    idx = Math.max(1, Math.min(idx, playlist.length));
     refreshListArea();
 }
 
