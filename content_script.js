@@ -131,14 +131,31 @@ function clearList() {
     refreshListArea();
 }
 
+function remove() {
+    var self = this;
+    playlist = playlist.filter(function(puzzle) {
+        return puzzle !== self.puzzle;
+    });
+    idx = Math.min(idx, playlist.length);
+    refreshListArea();
+}
+
 function refreshListArea() {
     nav.innerHTML = `<span>${idx}/${playlist.length}</span>`;
     listArea.innerHTML = "";
     for(var i=0;i<playlist.length;i++) {
         var puzzle = playlist[i];
-        
+        var removeBtn = document.createElement("button");
+        removeBtn.className = "btn";
+        removeBtn.textContent = "-";
+        removeBtn.addEventListener("click", {
+            puzzle: puzzle,
+            handleEvent: remove
+        });
+
         var d = document.createElement("div");
         d.innerHTML = `<span>${i===idx - 1?'◆':''}</span><a href="${puzzle.url}">${puzzle.name}</a>`;
+        d.appendChild(removeBtn);
         listArea.appendChild(d);
     }
 }
