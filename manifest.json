@@ -4,10 +4,8 @@
     "version": "1.0",
     "description": "Cindyに投稿された問題をプレイリスト化して閲覧できる拡張機能",
     "permissions": [
-        "tabs",
-        "background",
-        "http://*/*",
-        "https://*/*"
+        "https://cindythink.com/*",
+        "https://www.cindythink.com/*"
     ],
     "content_scripts": [
         {
