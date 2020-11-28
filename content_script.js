@@ -12,41 +12,28 @@ var listArea  = document.createElement("div");
 
 function init() {
     panel.className = "panel visible";
-    panel.style = `
-    position: fixed;
-    padding: 5px;
-    right: 10px;
-    bottom: 10px;
-    z-index: 9999;
-    background: rgb(252, 244, 220);
-    border-style: groove; 
-    border-width: 4px; 
-    border-radius: 5px; 
-    border-color: rgb(211, 139, 117);
-    `;
     document.body.appendChild(panel);
     navBar.style = "text-align: center;";
     panel.appendChild(navBar);
 
     var prevBtn = document.createElement("button");
+    prevBtn.className = "btn";
     prevBtn.textContent = "<";
-    prevBtn.style = "padding: 5px 10px;"
     prevBtn.addEventListener("click", prev);
     navBar.appendChild(prevBtn);
 
     nav.innerHTML = `<span>${idx}/${playlist.length}</span>`;
-    nav.style = "padding: 5px 10px; margin: 0 10px;";
     navBar.appendChild(nav);
     
     var moveBtn = document.createElement("button");
+    moveBtn.className = "btn";
     moveBtn.textContent = "移動";
-    moveBtn.style = "padding: 5px 10px; margin-right: 10px;";
     moveBtn.addEventListener("click", move);
     navBar.appendChild(moveBtn);
 
     var nextBtn = document.createElement("button");
+    nextBtn.className = "btn";
     nextBtn.textContent = ">";
-    nextBtn.style = "padding: 5px 10px;";
     nextBtn.addEventListener("click", next);
     navBar.appendChild(nextBtn);
 
@@ -54,7 +41,7 @@ function init() {
     panel.appendChild(listArea);
     
     var clearBtn = document.createElement("button");
-    clearBtn.style = "padding: 5px 10px;";
+    clearBtn.className = "btn";
     clearBtn.textContent = "クリア";
     clearBtn.addEventListener("click", clearList);
     panel.appendChild(clearBtn);
@@ -83,11 +70,10 @@ function showButton() {
         var link = puzzle.href;
         var puzzleName = puzzle.textContent;
         var btn = document.createElement("button");
-        btn.style = "padding: 5px 10px";
-        btn.className = "add-button"
+        btn.className = "btn"
         btn.textContent = "追加";
-        
         btn.addEventListener("click", {puzzle: {name: puzzleName, url: link}, handleEvent: push});
+
         elem.appendChild(btn);
     }
 }
