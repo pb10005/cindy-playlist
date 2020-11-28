@@ -23,5 +23,11 @@
 }
 
 .btn{
+    margin: 0 2px;
     padding: 5px 10px;
+    background: transparent;
+    border-color: rgb(213, 123, 147);
+    border-width: 2px;
+    border-radius: 3px;
+    border-style: groove;
 }

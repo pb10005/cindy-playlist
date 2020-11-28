@@ -3,12 +3,25 @@ var playlist = [];
 var currentScroll = 0;
 
 window.addEventListener("load", init);
+window.addEventListener("unload", destroy);
 window.addEventListener("scroll", onScroll);
 
 var panel = document.createElement("div");
 var navBar = document.createElement("div");
 var nav = document.createElement("span");
 var listArea  = document.createElement("div");
+
+var target = document.body;
+var config = { childList: true, subtree: true };
+var observer = new MutationObserver(function(mutations) {
+    observer.disconnect();
+    mutations.forEach(function(mutation) {
+    if(mutation.type === "childList") {
+        showButton();
+    }
+  });
+  observer.observe(target, config);
+});
 
 function init() {
     panel.className = "panel visible";
@@ -24,12 +37,6 @@ function init() {
 
     nav.innerHTML = `<span>${idx}/${playlist.length}</span>`;
     navBar.appendChild(nav);
-    
-    var moveBtn = document.createElement("button");
-    moveBtn.className = "btn";
-    moveBtn.textContent = "移動";
-    moveBtn.addEventListener("click", move);
-    navBar.appendChild(moveBtn);
 
     var nextBtn = document.createElement("button");
     nextBtn.className = "btn";
@@ -40,37 +47,36 @@ function init() {
     listArea.style = "padding: 5px; white-space: pre-wrap;";
     panel.appendChild(listArea);
     
+    var moveBtn = document.createElement("button");
+    moveBtn.className = "btn";
+    moveBtn.textContent = "選択中の問題を見る";
+    moveBtn.addEventListener("click", move);
+    panel.appendChild(moveBtn);
+
     var clearBtn = document.createElement("button");
     clearBtn.className = "btn";
     clearBtn.textContent = "クリア";
     clearBtn.addEventListener("click", clearList);
     panel.appendChild(clearBtn);
-
-    var target = document;
-    var observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-        if(mutation.type === "childList") {
-            showButton();
-        }
-      });    
-    });
-    var config = { childList: true, subtree: true };
     observer.observe(target, config);
 }
 
+function destroy() {
+    observer.disconnect();
+}
 
 function showButton() {
     var elems = document.getElementsByClassName("css-1wfxbpx");
 
     for(var i=0;i<elems.length;i++) {
         var elem = elems[i];
-        if(elem.getElementsByClassName("add-button").length > 0) continue; 
+        if(elem.getElementsByClassName("add-btn").length > 0) continue; 
 
         var puzzle = elem.getElementsByTagName("a")[0];
         var link = puzzle.href;
         var puzzleName = puzzle.textContent;
         var btn = document.createElement("button");
-        btn.className = "btn"
+        btn.className = "btn add-btn"
         btn.textContent = "追加";
         btn.addEventListener("click", {puzzle: {name: puzzleName, url: link}, handleEvent: push});
 
