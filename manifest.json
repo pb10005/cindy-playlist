@@ -1,0 +1,19 @@
+{
+    "name": "Cindy Playlist",
+    "manifest_version": 2,
+    "version": "1.0",
+    "description": "Cindyに投稿された問題をプレイリスト化して閲覧できる拡張機能",
+    "permissions": [
+        "tabs",
+        "background",
+        "http://*/*",
+        "https://*/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["https://cindythink.com/*", "https://www.cindythink.com/*"],
+            "js": ["content_script.js"],
+            "css": ["custom.css"]
+        }
+    ]
+}
