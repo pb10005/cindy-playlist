@@ -26,7 +26,7 @@ var observer = new MutationObserver(function(mutations) {
 function init() {
     panel.className = "panel visible";
     document.body.appendChild(panel);
-    navBar.style = "text-align: center;";
+    navBar.className = "nav-bar";
     panel.appendChild(navBar);
 
     var prevBtn = document.createElement("button");
@@ -145,17 +145,22 @@ function refreshListArea() {
     listArea.innerHTML = "";
     for(var i=0;i<playlist.length;i++) {
         var puzzle = playlist[i];
+        var listItem = document.createElement("div");
+        listItem.className = "list-item";
+        listArea.appendChild(listItem);
+
+        var d = document.createElement("div");
+        d.className = "list-left";
+        d.innerHTML = `<span>${i===idx - 1?'◆':''}</span><a href="${puzzle.url}">${puzzle.name}</a>`;
+        listItem.appendChild(d);
+
         var removeBtn = document.createElement("button");
-        removeBtn.className = "btn";
+        removeBtn.className = "btn list-right";
         removeBtn.textContent = "-";
         removeBtn.addEventListener("click", {
             puzzle: puzzle,
             handleEvent: remove
         });
-
-        var d = document.createElement("div");
-        d.innerHTML = `<span>${i===idx - 1?'◆':''}</span><a href="${puzzle.url}">${puzzle.name}</a>`;
-        d.appendChild(removeBtn);
-        listArea.appendChild(d);
+        listItem.appendChild(removeBtn);
     }
 }

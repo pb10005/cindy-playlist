@@ -11,6 +11,24 @@
     border-color: rgb(211, 139, 117);
 }
 
+.nav-bar {
+    display: flex;
+    justify-content: space-around;
+}
+
+.list-item {
+    display: flex;
+    justify-content:space-between;
+    vertical-align: center;
+    margin: 5px 0;
+}
+
+.list-left {
+    display: inline-block;
+    margin: auto 0;
+}
+
+
 .hidden {
     visibility: hidden;
     opacity: 0;
