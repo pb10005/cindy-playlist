@@ -1,7 +1,7 @@
 {
     "name": "Cindy Playlist",
     "manifest_version": 2,
-    "version": "1.0",
+    "version": "1.2",
     "description": "Cindyに投稿された問題をプレイリスト化して閲覧できる拡張機能",
     "permissions": [
         "https://cindythink.com/*",
